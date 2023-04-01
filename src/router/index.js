@@ -1,20 +1,25 @@
-import { createRouter,createWebHashHistory } from 'vue-router';
-import Home from '../views/Home.vue';
-import User from '../views/User.vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import Main from '../views/Main.vue'
 
 // 配置路由映射
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
-            path: '/home',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/user',
-            name: 'user',
-            component: User
+            path: '/',
+            component: Main,
+            children: [
+                {
+                    path: '/home',
+                    name: 'home',
+                    component: () => import('../views/Home.vue')
+                },
+                {
+                    path: '/user',
+                    name: 'user',
+                    component: () => import('../views/User.vue')
+                }
+            ]
         }
     ]
 })
