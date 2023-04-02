@@ -9,4 +9,5 @@
 import Main from './views/Main.vue';
 </script>
 
-<style></style>
+<style>
+</style>

@@ -1,11 +1,9 @@
 <template>
     <div class="common-layout">
         <el-container>
-            <el-header>Header</el-header>
+            <el-aside width="auto"><c-aside /></el-aside>
             <el-container>
-                <el-aside width="200px">
-                    <c-aside />
-                </el-aside>
+                <el-header><c-header/></el-header>
                 <el-main>
                     <!-- 子路由出口 -->
                     <router-view></router-view>
@@ -14,7 +12,13 @@
         </el-container>
     </div>
 </template>
-
 <script setup>
-import CAside from '../components/CAside.vue'
+import CAside from '../components/CAside.vue';
+import CHeader from '../components/CHeader.vue';
 </script>
+
+<style lang="less" scoped>
+.el-header {
+    padding: 0;
+}
+</style>

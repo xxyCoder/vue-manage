@@ -8,6 +8,7 @@ const router = createRouter({
         {
             path: '/',
             component: Main,
+            redirect: '/home',
             children: [
                 {
                     path: '/home',
@@ -18,6 +19,21 @@ const router = createRouter({
                     path: '/user',
                     name: 'user',
                     component: () => import('../views/User.vue')
+                },
+                {
+                    path: '/mall',
+                    name: 'mall',
+                    component: () => import('../views/Mall.vue')
+                },
+                {
+                    path: '/page1',
+                    name: 'pageOne',
+                    component: () => import('../views/PageOne.vue')
+                },
+                {
+                    path: '/page2',
+                    name: 'pageTwo',
+                    component: () => import('../views/PageTwo.vue')
                 }
             ]
         }
