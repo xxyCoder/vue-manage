@@ -16,7 +16,12 @@ import {
     ElIcon,
     ElDropdown,
     ElDropdownItem,
-    ElDropdownMenu
+    ElDropdownMenu,
+    ElRow,
+    ElCol,
+    ElCard,
+    ElTable,
+    ElTableColumn
 } from 'element-plus'
 import 'element-plus/dist/index.css';
 import './assets/common/resize.css'
@@ -38,5 +43,10 @@ app
     .use(ElDropdown)
     .use(ElDropdownMenu)
     .use(ElDropdownItem)
+    .use(ElRow)
+    .use(ElCol)
+    .use(ElCard)
+    .use(ElTable)
+    .use(ElTableColumn)
     .use(store)
     .mount('#app');
