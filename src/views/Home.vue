@@ -1,6 +1,6 @@
 <template>
     <el-row>
-        <el-col :span="8">
+        <el-col :span="8" style="padding-right: 10px">
             <el-card shadow="always">
                 <div class="user">
                     <img src="../assets/images/avatar.jpg" alt="" />
@@ -20,7 +20,7 @@
                 </el-table>
             </el-card>
         </el-col>
-        <el-col :span="16">
+        <el-col :span="16" style="padding-left: 10px">
             <div class="num">
                 <el-card :body-style="{ display: 'flex',padding: '0' }" v-for="item in state.countData" :key="item.name">
                     <el-icon :style="{ background: item.color }">
@@ -32,43 +32,33 @@
                     </div>
                 </el-card>
             </div>
+            <el-card style="height: 280px">
+                
+            </el-card>
+            <div class="graph">
+                <el-card style="height: 260px;"></el-card>
+                <el-card style="height: 260px;"></el-card>
+            </div>
         </el-col>
     </el-row>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive,onMounted } from 'vue'
 import {
     CircleCheck
 } from '@element-plus/icons-vue';
 
+import { getData } from '../api/index'
+onMounted(async () => {
+    const data = await getData();
+    const { tableData } = data.data.data;
+    console.log(tableData);
+    state.tableData = tableData;
+})
+
 const state = reactive({
-    tableData: [
-        {
-            name: 'oppo',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-        },
-        {
-            name: 'vivo',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-        },
-        {
-            name: 'huawei',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-        },
-        {
-            name: 'apple',
-            todayBuy: 100,
-            monthBuy: 300,
-            totalBuy: 800
-        }
-    ],
+    tableData: [],
     tableLable: {
         name: '品牌',
         todayBuy: '今日购买',
@@ -187,4 +177,13 @@ const state = reactive({
         }
     }
 
-}</style>
+}
+.graph {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .el-card {
+        width: 48%;
+    }
+}
+</style>
