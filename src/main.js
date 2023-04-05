@@ -22,7 +22,9 @@ import {
     ElCol,
     ElCard,
     ElTable,
-    ElTableColumn
+    ElTableColumn,
+    ElBreadcrumb,
+    ElBreadcrumbItem
 } from 'element-plus'
 import 'element-plus/dist/index.css';
 import './assets/common/resize.css'
@@ -49,5 +51,7 @@ app
     .use(ElCard)
     .use(ElTable)
     .use(ElTableColumn)
+    .use(ElBreadcrumb)
+    .use(ElBreadcrumbItem)
     .use(store)
     .mount('#app');

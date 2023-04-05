@@ -1,13 +1,17 @@
 <template>
     <div class="header-content">
         <div class="l-content">
-            <el-button :icon="Menu" @click="handleMenu"></el-button>
-            <span class="text">首页</span>
+            <el-button style="margin-right: 20px" :icon="Menu" @click="handleMenu"></el-button>
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item v-for="item in store.state.tab.tableList" :key="item.path" :to="{ path: item.path }">
+                    {{ item.label }}
+                </el-breadcrumb-item>
+            </el-breadcrumb>
         </div>
         <div class="r-content">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <img class="user" src="../assets/images/avatar.jpg" alt="头像"/>
+                    <img class="user" src="../assets/images/avatar.jpg" alt="头像" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -47,6 +51,27 @@ const handleMenu = () => {
         font-size: 14px;
         margin-left: 10px;
     }
+
+    .l-content {
+        display: flex;
+        align-items: center;
+
+        :deep(.el-breadcrumb__item) {
+            .el-breadcrumb__inner {
+                font-weight: normal;
+
+                &.is-link {
+                    color: #666
+                }
+            }
+            &:last-child {
+                .el-breadcrumb__inner {
+                    color: #fff
+                }
+            }
+        }
+    }
+
     .r-content {
         .user {
             width: 40px;

@@ -95,6 +95,7 @@ const handleClose = (key, keyPath) => {
 const clickMenu = (item) => {
     // console.log(item);
     router.push(item.path);
+    store.commit('selectMenu',item);
 }
 // 计算属性
 const noChild = computed(() => state.menuData.filter(item => !item.children));  // 没有子菜单

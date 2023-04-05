@@ -22,7 +22,7 @@
         </el-col>
         <el-col :span="16" style="padding-left: 10px">
             <div class="num">
-                <el-card :body-style="{ display: 'flex',padding: '0' }" v-for="item in state.countData" :key="item.name">
+                <el-card :body-style="{ display: 'flex', padding: '0' }" v-for="item in state.countData" :key="item.name">
                     <el-icon :style="{ background: item.color }">
                         <CircleCheck />
                     </el-icon>
@@ -33,28 +33,135 @@
                 </el-card>
             </div>
             <el-card style="height: 280px">
-                
+                <div ref="echarts1" style="height: 280px;"></div>
             </el-card>
             <div class="graph">
-                <el-card style="height: 260px;"></el-card>
-                <el-card style="height: 260px;"></el-card>
+                <el-card style="height: 260px;">
+                    <div ref="echarts2" style="height: 260px;"></div>
+                </el-card>
+                <el-card style="height: 260px;">
+                    <div ref="echarts3" style="height: 190px;"></div>
+                </el-card>
             </div>
         </el-col>
     </el-row>
 </template>
 
 <script setup>
-import { reactive,onMounted } from 'vue'
+import { reactive, onMounted, ref } from 'vue'
 import {
     CircleCheck
 } from '@element-plus/icons-vue';
-
+import * as echarts from 'echarts';
 import { getData } from '../api/index'
+import { use } from 'echarts';
+
+const echarts1 = ref();
+const echarts2 = ref();
+const echarts3 = ref();
+
 onMounted(async () => {
     const data = await getData();
     const { tableData } = data.data.data;
-    console.log(tableData);
     state.tableData = tableData;
+
+    const myEcharts1 = echarts.init(echarts1.value);
+    const { orderData,userData,videoData } = data.data.data;
+    const xAxis = Object.keys(orderData.data[0]);
+    let echarts1Option = {
+        // 处理x轴数据
+        xAxis: {
+            data: xAxis
+        },
+        legend: {
+            data: xAxis
+        },
+        series: [],
+        yAxis: {}
+    };
+    xAxis.forEach(key => {
+        echarts1Option.series.push({
+            name: key,
+            data: orderData.data.map(item => item[key]),
+            type: 'line'
+        });
+    });
+    myEcharts1.setOption(echarts1Option);
+
+    const myEcharts2 = echarts.init(echarts2.value);
+    const echarts2Option = {
+        legend: {
+            textStyle: {
+                color: "#333"
+            },
+        },
+        grid: {
+            left: "20%"
+        },
+        tooltip: {
+            trigger: "axis"
+        },
+        xAxis: {
+            type: "category",
+            data: userData.map(item => item.data),
+            axisLine: {
+                lineStyle: {
+                    color: '#17b3a3'
+                }
+            },
+            axisLabel: {
+                interval: 0,
+                color: '#333'
+            }
+        },
+        yAxis: [
+            {
+                type: "value",
+                axisLine: {
+                    lineStyle: {
+                        color: "#17b3a3"
+                    }
+                }
+            }
+        ],
+        color: ["#2ec7c9","#b6a2de"],
+        series: [
+            {
+                name: '新增用户',
+                data: userData.map(item => item.new),
+                type: 'bar'
+            },
+            {
+                name: '活跃用户',
+                data: userData.map(item => item.active),
+                type: 'bar'
+            }
+        ]
+    };
+    myEcharts2.setOption(echarts2Option);
+
+    const myEcharts3 = echarts.init(echarts3.value);
+    const echarts3Option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        color: [
+            "0f78f4",
+            "dd536b",
+            "#9462e5",
+            "#a6a6a6",
+            "#e1bb22",
+            "#39c362",
+            "#3ed1cf"
+        ],
+        series: [
+            {
+                data: videoData,
+                type: 'pie'
+            }
+        ]
+    };
+    myEcharts3.setOption(echarts3Option);
 })
 
 const state = reactive({
@@ -149,6 +256,7 @@ const state = reactive({
     .el-card {
         margin-bottom: 20px;
         width: 32%;
+
         .el-icon {
             width: 80px;
             height: 80px;
@@ -157,6 +265,7 @@ const state = reactive({
             line-height: 80px;
             color: #fff;
         }
+
         .detail {
             display: flex;
             margin-left: 15px;
@@ -169,6 +278,7 @@ const state = reactive({
                 font-size: 30px;
                 margin-bottom: 10px;
             }
+
             .desc {
                 font-size: 14px;
                 color: #999;
@@ -178,12 +288,13 @@ const state = reactive({
     }
 
 }
+
 .graph {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+
     .el-card {
         width: 48%;
     }
-}
-</style>
+}</style>
