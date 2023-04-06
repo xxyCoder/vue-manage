@@ -87,13 +87,12 @@ const state = reactive({
 const router = useRouter();
 // 方法
 const handleOpen = (key, keyPath) => {
-    console.log(key, keyPath)
+    // console.log(key, keyPath)
 }
 const handleClose = (key, keyPath) => {
-    console.log(key, keyPath)
+    // console.log(key, keyPath)
 }
 const clickMenu = (item) => {
-    // console.log(item);
     router.push(item.path);
     store.commit('selectMenu',item);
 }

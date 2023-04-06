@@ -24,7 +24,9 @@ import {
     ElTable,
     ElTableColumn,
     ElBreadcrumb,
-    ElBreadcrumbItem
+    ElBreadcrumbItem,
+    ElTag,
+    ElDialog
 } from 'element-plus'
 import 'element-plus/dist/index.css';
 import './assets/common/resize.css'
@@ -53,5 +55,7 @@ app
     .use(ElTableColumn)
     .use(ElBreadcrumb)
     .use(ElBreadcrumbItem)
+    .use(ElTag)
+    .use(ElDialog)
     .use(store)
     .mount('#app');

@@ -24,6 +24,10 @@ export default {
                     state.tableList.push(val);
                 }
             }
+        },
+        closeTag(state,payload) {
+            const index = state.tableList.findIndex(item => item.name === payload.name);
+            state.tableList.splice(index,1);
         }
     }
 }
