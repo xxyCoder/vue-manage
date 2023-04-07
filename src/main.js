@@ -26,7 +26,13 @@ import {
     ElBreadcrumb,
     ElBreadcrumbItem,
     ElTag,
-    ElDialog
+    ElDialog,
+    ElForm,
+    ElFormItem,
+    ElInput,
+    ElSelect,
+    ElOption,
+    ElDatePicker
 } from 'element-plus'
 import 'element-plus/dist/index.css';
 import './assets/common/resize.css'
@@ -57,5 +63,11 @@ app
     .use(ElBreadcrumbItem)
     .use(ElTag)
     .use(ElDialog)
+    .use(ElForm)
+    .use(ElFormItem)
+    .use(ElInput)
+    .use(ElSelect)
+    .use(ElOption)
+    .use(ElDatePicker)
     .use(store)
     .mount('#app');
