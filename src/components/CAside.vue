@@ -37,7 +37,7 @@ import { useStore } from 'vuex'
 
 const store = useStore();
 // 计算属性
-const isCollapse = computed(() => store.state.isCollapse);
+const isCollapse = computed(() => store.state.tab.isCollapse);
 // 数据
 const state = reactive({
     menuData: [

@@ -32,7 +32,8 @@ import {
     ElInput,
     ElSelect,
     ElOption,
-    ElDatePicker
+    ElDatePicker,
+    ElMessage
 } from 'element-plus'
 import 'element-plus/dist/index.css';
 import './assets/common/resize.css'
@@ -69,5 +70,6 @@ app
     .use(ElSelect)
     .use(ElOption)
     .use(ElDatePicker)
+    .use(ElMessage)
     .use(store)
     .mount('#app');

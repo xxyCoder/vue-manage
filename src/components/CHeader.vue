@@ -16,7 +16,7 @@
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>退出</el-dropdown-item>
+                        <el-dropdown-item @click="logout">退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -30,10 +30,17 @@ import {
     ArrowDown
 } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router';
+import Cookie from 'js-cookie'
 const store = useStore();
+const router = useRouter();
 // 方法
 const handleMenu = () => {
     store.commit('collapseMenu');
+}
+const logout = () => {
+    Cookie.remove('Token');
+    router.push('/login');
 }
 </script>
 
